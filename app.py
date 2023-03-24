@@ -92,7 +92,7 @@ def create_app(test_config=None):
 
     @app.errorhandler(404)
     def not_found(error):
-        return render_template('/pages/errors/error.html', data={
+        return render_template('pages/errors/404.html', data={
             'success': False,
             'error': 404,
             'description': 'Sorry but the page you are looking for does not exist, have been removed, name changed or is temporarily unavailable.',
