@@ -37,6 +37,10 @@ def create_app(test_config=None):
     @app.route("/about")
     def about_page():
         return render_template("pages/about.html")
+    
+    @app.route("/caption")
+    def caption_page():
+        return render_template("pages/caption.html")
 
     @app.route("/prediction", methods=["POST", "GET"])
     def prediction_page():
