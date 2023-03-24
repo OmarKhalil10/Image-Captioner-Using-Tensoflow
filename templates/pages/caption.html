@@ -10,23 +10,11 @@
           <div class="home_left_img">
             <main class="main_full">
               <div class="container">
-                <div class="panel">
-                  <div class="button_outer">
-                    <div class="btn_upload">
-                      <input type="file" id="upload_file" name="">
-                      Upload Image
-                    </div>
-                    <div class="processing_bar"></div>
-                    <div class="success_box">
-                      <!-- <input type="submit" value="Captioning...">-->
-                    </div>
-                  </div>
+                  <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="image">
+                    <input type="submit" value="Upload">
+                  </form>
                 </div>
-                <div class="error_msg"></div>
-                <div class="uploaded_file_view" id="uploaded_view">
-                  <span class="file_remove">X</span>
-                </div>
-              </div>
             </main>
           </div>
         </div>
