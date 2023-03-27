@@ -34,8 +34,12 @@ def create_app(test_config=None):
         return render_template("pages/index.html")
 
     @app.route("/about")
-    def about_page():
+    def faq():
         return render_template("pages/about.html")
+    
+    @app.route("/faq")
+    def about_page():
+        return render_template("pages/faq.html")
     
     @app.route("/caption")
     def caption_page():
