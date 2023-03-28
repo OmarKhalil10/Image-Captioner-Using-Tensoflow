@@ -3,31 +3,32 @@
 <link rel="stylesheet" href="/static/css/upload.css">
 
 <section class="home_banner_area">
-  <div class="banner_inner">
+  <div class="banner_inner" style="height: 100vh;">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
           <div class="home_left_img">
-            <main class="main_full">
-              <div class="container">
-                  <form action="/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" name="image">
-                    <input type="submit" value="Upload">
-                  </form>
-                </div>
-            </main>
+            <div class="container">
+              <form class="form-inline" enctype="multipart/form-data" action="/caption" method="POST">
+                <label><b>Image: &nbsp;&nbsp; </b></label>
+                <input type="file" class="form-control" name="image">
+
+                <button type="submit" class="btn btn-primary"> Submit</button>
+              </form>
+            </div>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="banner_content">
-            <h2>
-              Caption
-            </h2>
-            <textarea rows="4" cols="50" readonly>
-              image captioning....  
-            </textarea>
-
-            <!--<input type="submit" value="Captioning...">-->
+            {% if results %}
+            <div class="col-sm-4">
+              <img style="height: 90%; width: 100%;" src="{{results.image}}">
+            </div>
+            <div class="col-sm-8">
+              <p class="text">Generated Caption : </p>
+              <p><b> {{results.description}} </b> </p>
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>

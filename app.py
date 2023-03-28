@@ -1,6 +1,9 @@
 import os
 from flask import Flask, request, render_template, redirect, abort, jsonify, flash, url_for
 from flask_cors import CORS
+from caption import *
+import warnings
+warnings.filterwarnings("ignore")
 from sqlalchemy import or_
 import numpy as np
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -45,40 +48,36 @@ def create_app(test_config=None):
     def caption_page():
         return render_template("pages/caption.html")
 
-    @app.route("/upload", methods=["POST"])
-    def upload():
+    @app.route("/caption", methods=["POST"])
+    def upload_file():
         # check if the post request has the file part
         if request.method == 'POST':
             if 'image' not in request.files:
                 flash('No file part')
-            file = request.files['image']
+
+            image = request.files['image']
+            
+            # uncomment these lines to log the image and filename
+            # print(img)
+            # print(img.filename)
+
             # if user does not select file, browser also
             # submit an empty part without filename
-            if file.filename == '':
+            if image.filename == '':
                 flash('No File Selected')
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-            model =  tf.keras.models.load_model('.\\model_weights.h5')
+            if image and allowed_file(image.filename):
+                filename = secure_filename(image.filename)
+                image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            img = image.load_img(path, target_size=(224, 224))
-            x=image.img_to_array(img)
-            x /= 255
-            x=np.expand_dims(x, axis=0)
-            images = np.vstack([x])
-
-            prediction = model.predict(images, batch_size=10)
-
-            return jsonify({
-                'prediction': prediction,
-                'success': True,
-                #'caption': caption
-                }), 200
-        return jsonify({
-                'success': False
-                }), 405
+            caption = caption_this_image(path)
+            
+            result_dic = {
+                'image' : path,
+                'description' : caption
+            }
+        return render_template('pages/caption.html', results = result_dic)
 
     @app.route('/uploads/<filename>')
     def uploaded_file(filename):
