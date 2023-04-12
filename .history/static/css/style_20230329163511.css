@@ -67,10 +67,9 @@ button:focus {
   @media (max-width: 767px) {
     .section_gap {
       padding: 60px 0; } }
-/*
+
 .section_gap_top {
   padding-top: 120px; }
-  */
   @media (max-width: 767px) {
     .section_gap_top {
       padding-top: 60px; } }
@@ -2282,11 +2281,7 @@ h6 {
 /* Start About Us Area css
 ============================================================================================ */
 .about_us_area {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height:auto;
-  margin:25px 0; }
+  position: relative; }
 
 .about_content {
   position: relative; }
