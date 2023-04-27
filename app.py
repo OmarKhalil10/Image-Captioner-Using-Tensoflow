@@ -1,7 +1,8 @@
 import os
 from flask import Flask, request, render_template, redirect, abort, jsonify, flash, url_for
 from flask_cors import CORS
-from caption import *
+from flickr8k import *
+from flickr30k import *
 import warnings
 warnings.filterwarnings("ignore")
 from sqlalchemy import or_
@@ -35,20 +36,12 @@ def create_app(test_config=None):
     @app.route("/")
     def landing_page():
         return render_template("pages/index.html")
-
-    @app.route("/about")
-    def faq():
-        return render_template("pages/about.html")
-    
-    @app.route("/faq")
-    def about_page():
-        return render_template("pages/faq.html")
     
     @app.route("/caption")
     def caption_page():
         return render_template("pages/caption.html")
 
-    @app.route("/caption", methods=["POST"])
+    @app.route("/flickr8k", methods=["POST"])
     def upload_file():
         # check if the post request has the file part
         if request.method == 'POST':
@@ -56,10 +49,6 @@ def create_app(test_config=None):
                 flash('No file part')
 
             image = request.files['image']
-            
-            # uncomment these lines to log the image and filename
-            # print(img)
-            # print(img.filename)
 
             # if user does not select file, browser also
             # submit an empty part without filename
@@ -71,11 +60,38 @@ def create_app(test_config=None):
                 image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
             path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            caption = caption_this_image(path)
-            
+            caption8k = caption_this_image(path)
+
             result_dic = {
                 'image' : path,
-                'description' : caption
+                'description' : caption8k
+            }
+        return render_template('pages/caption.html', results = result_dic)
+
+    @app.route("/flickr30k", methods=["POST"])
+    def up_file():
+        # check if the post request has the file part
+        if request.method == 'POST':
+            if 'image' not in request.files:
+                flash('No file part')
+
+            image = request.files['image']
+
+            # if user does not select file, browser also
+            # submit an empty part without filename
+            if image.filename == '':
+                flash('No File Selected')
+
+            if image and allowed_file(image.filename):
+                filename = secure_filename(image.filename)
+                image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            caption30k = runModel(path)
+
+            result_dic = {
+                'image' : path,
+                'description' : caption30k
             }
         return render_template('pages/caption.html', results = result_dic)
 
@@ -97,7 +113,6 @@ def create_app(test_config=None):
         return render_template('pages/errors/404.html', data={
             'success': False,
             'error': 404,
-            'description': 'Sorry but the page you are looking for does not exist, have been removed, name changed or is temporarily unavailable.',
             'message': 'Page Not Be Found'
         }), 404
 

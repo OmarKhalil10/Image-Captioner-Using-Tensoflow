@@ -8,10 +8,11 @@
         <div class="col-lg-6">
           <div class="home_left_img">
             <div class="container">
-              <form class="form-inline" enctype="multipart/form-data" action="/caption" method="POST">
+              <input type="radio" name="option" value="option1" onchange="changeAction(this)"> Flickr8k
+              <input type="radio" name="option" value="option2" onchange="changeAction(this)"> Flickr30k
+              <form id="myForm" class="form-inline" enctype="multipart/form-data" action="" method="POST">
                 <label><b>Image: &nbsp;&nbsp; </b></label>
                 <input type="file" class="form-control" name="image">
-
                 <button type="submit" class="btn btn-primary"> Submit</button>
               </form>
             </div>
@@ -35,25 +36,12 @@
   </div>
   </div>
 </section>
-
 {% endblock %}
+
 {% block script %}
-<script src="/static/js/jquery-3.2.1.min.js"></script>
-<script src="/static/js/popper.js"></script>
-<script src="/static/js/bootstrap.min.js"></script>
-<script src="/static/js/stellar.js"></script>
-<script src="/static/js/jquery.magnific-popup.min.js"></script>
-<script src="/static/js/jquery.nice-select.min.js"></script>
+<script src="/static/js/change-action.js"></script>
 <script src="/static/js/imagesloaded.pkgd.min.js"></script>
 <script src="/static/js/isotope-min.js"></script>
-<script src="/static/js/owl.carousel.min.js"></script>
-<script src="/static/js/jquery.ajaxchimp.min.js"></script>
-<script src="/static/js/jquery.waypoints.min.js"></script>
-<script src="/static/js/jquery.counterup.min.js"></script>
-<script src="/static/js/mail-script.js"></script>
 <script src="/static/js/js.js"></script>
-<script src="/static/js/gmaps.min.js"></script>
-<script src="/static/js/theme.js"></script>
-<script src="/static/js/upload.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 {% endblock %}
