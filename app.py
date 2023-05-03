@@ -1,8 +1,11 @@
 import os
+import sys
+sys.path.append('./src')
 from flask import Flask, request, render_template, redirect, abort, jsonify, flash, url_for
 from flask_cors import CORS
-from flickr8k import *
-from flickr30k import *
+from src.flickr8k import *
+from src.flickr30k import *
+from src.VitGpt2ImageCaption import *
 import warnings
 warnings.filterwarnings("ignore")
 from sqlalchemy import or_
@@ -13,6 +16,7 @@ from werkzeug.utils import secure_filename
 from flask import send_from_directory
 from keras.preprocessing import image
 import matplotlib.pyplot as plt
+
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
@@ -92,6 +96,38 @@ def create_app(test_config=None):
             result_dic = {
                 'image' : path,
                 'description' : caption30k
+            }
+        return render_template('pages/caption.html', results = result_dic)
+    
+    @app.route("/VitGpt2ImageCaption", methods=["POST"])
+    def upload_f():
+        # check if the post request has the file part
+        if request.method == 'POST':
+            if 'image' not in request.files:
+                flash('No file part')
+
+            image = request.files['image']
+
+            # if user does not select file, browser also
+            # submit an empty part without filename
+            if image.filename == '':
+                flash('No File Selected')
+
+            if image and allowed_file(image.filename):
+                filename = secure_filename(image.filename)
+                image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+            path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            VitGpt2ImageCaption = predict_step([path])
+
+            # Extract the string from the input list
+            input_string = VitGpt2ImageCaption[0]
+            # Remove the square brackets and single quotes from the input string
+            captiongpt = input_string.strip("[]'")
+
+            result_dic = {
+                'image' : path,
+                'description' : captiongpt
             }
         return render_template('pages/caption.html', results = result_dic)
 

@@ -20,10 +20,24 @@ def NEW_UNIQUE_NAME():
     return render_template('FOLDER_PATH/FILE_PATH.html')
 ```
 
-## To run the development server
-* Open git bash terminal
-```bash
+### Initialize and activate a virtualenv using
+```
+python -m virtualenv venv
+source venv/Scripts/activate
+```
+### to deactivate 
+```
+deactivate
+```
+### Install the dependencies
+```
+pip install -r requirements.txt
+```
+### To run the development server
+
+```
 FLASK_APP=app.py
 FLASK_ENV=development
+FLASK_DEBUG=true
 flask run --reload
 ```

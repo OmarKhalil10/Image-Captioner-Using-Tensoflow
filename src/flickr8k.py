@@ -11,7 +11,7 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 
-model = tf.keras.models.load_model('.\\model_weights\\flickr8k\\model_9.h5')
+model = tf.keras.models.load_model('.\\models\\flickr8k\\model_9.h5')
 #model.predict()
 
 model_temp = ResNet50(weights="imagenet", input_shape=(224,224,3))

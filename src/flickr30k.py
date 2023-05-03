@@ -20,8 +20,7 @@ index_to_word = {}
 with open ("./storage/flickr30k/idx_to_word.pkl", 'rb') as file:
     index_to_word = pd.read_pickle(file, compression=None)
 
-print("Loading the model...")
-model = tf.keras.models.load_model('.\\model_weights\\flickr30k\\model_13.h5')
+model = tf.keras.models.load_model('.\\models\\flickr30k\\model_13.h5')
 
 resnet50_model = ResNet50 (weights = 'imagenet', input_shape = (224, 224, 3))
 resnet50_model = Model (resnet50_model.input, resnet50_model.layers[-2].output)
