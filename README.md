@@ -6,7 +6,7 @@
 python -m virtualenv venv
 source venv/Scripts/activate
 ```
-### to deactivate 
+### to deactivate
 ```
 deactivate
 ```
@@ -111,6 +111,57 @@ Configure and execute the training for **100** epochs
 ### Conclusion
 
 This may not be the best performing model, but the objective of this kernel is to give a gist of how Image Captioning problems can be approached. In the future work of this kernel Attention model training with Flickr30k dataset will be performed.
+
+
+Flickr30k Image Caption Generator is a deep learning-based model that generates natural language captions for images in the Flickr30k dataset. The model uses a convolutional neural network (CNN) to extract features from the images and a recurrent neural network (RNN) to generate captions.
+
+## Flickr30k Image Captioning using CNNs+LSTMs
+
+### Flickr30k dataset
+
+The [Flickr30k dataset](https://arxiv.org/abs/1505.04870) contains **31,783** images, each with five reference captions. The dataset is split into a training set of **29,000** images and a validation set of **1,000** images, with the remaining images held out for testing.
+
+To train the image caption generator, the CNN extracts features from the images, which are then fed into an RNN. The RNN generates a sequence of words, one at a time, by predicting the probability distribution over the vocabulary at each time step. The model is trained using a combination of cross-entropy loss and reinforcement learning to optimize the generated captions.
+
+The Flickr30k Image Caption Generator has achieved state-of-the-art performance on the Flickr30k dataset, with a BLEU score of 59.6 on the test set. This indicates that the generated captions are highly similar to the reference captions provided for each image.
+
+Overall, the Flickr30k Image Caption Generator is a powerful tool for automatically generating natural language descriptions of images, which has many potential applications in areas such as image search, image retrieval, and image understanding.
+
+### Download links:
+
+[Flickr30k dataset](https://www.kaggle.com/datasets/hsankesara/flickr-image-dataset/download?datasetVersionNumber=1)
+
+### A comparison of the used datasets
+
+![comparison](/documentation/images/flickr30k/comparison-30k-8k.png)
+
+### Modelling
+The model is based on encoder-decoder architecture. A two-dimensional convolutional neural network is used to encode the image features, and a one-dimensional
+convolutional neural network is used to encode the word sequences of the caption data. Later, both the encoded image and text features are merged and passed
+to a decoder to predict the caption in a word by word manner.
+
+![model](/documentation/images/flickr30k/model.png)
+
+### The model is divided into three parts
+
+1. **Image Feature Encoder:** We used pre-trained ResNet-50 as image feature extractor. It is trained on ImageNet dataset. Traditionally, neural networks with many layers tend to perform well in recognizing patterns. However, they also suffer from overfitting issues and are not easy to optimize.
+Residual CNNs are designed to have shortcut connections between layers. These connections perform identity mapping. ResNets are easy to optimize, and their performance increase with increasing network depth. We discard the final output layer of the ResNet-50 as it contains the output of image
+classification and used only the encoded image features produced by the hidden layers.
+
+2. **Word Sequence Encoder:** Two-dimensional convolutional neural networks have been extensively used in pattern recognition, image classification, and time series forecasting. The same property of these networks can be used in sequence processing. In our model, we used one-dimensional CNN for extracting one-dimensional patches from a sequence of words. The CNN has 512 filters with a kernel size of 3. The activation used is Rectified Linear Units(ReLU). The CNN is followed by a Global Max Pooling Layer, which captures critical features from the convolutional layer’s output.
+
+3. **Caption Generator:** The caption generator is a simple decoder containing a Dense 512 layer with ReLU activation. The output of the image feature encoder and word sequence encoder are combined by concatenation and used as input to the dense layer. The dense layer generates a softmax prediction for each word in the vocabulary to be the next word in the sequence, and the word with the highest probability is selected. This process continues until an ending token is generated.
+
+The caption generator’s output is transformed into a probability score for each word in the vocabulary. The greedy method chooses the word with the highest probability for each time step. This method may not always provide the best
+possible caption as any word’s prediction depends on all the previously predicted words. So, it is more efficient to select the sequence with the highest overall score from a candidate of sequences. So we use the beam search technique with a beam size of 5. It considers the top 5 candidate words at the first decode step. For each of the first words, it generates five-second words and chooses the top five combinations of first and second words based on the additive score. After the termination of five sequences, the sequence with the best overall score is selected. This method allows the process to be flexible and generate consistent
+results
+
+### Quantitative analysis of performances among different models
+
+![search-alg-comp](/documentation/images/flickr30k/search-algorithms-comparison-with-other-models.png)
+
+
+### Result and Analysis
 ## vit-gpt2-image-captioning
 
 The ViT (Vision Transformer) and GPT-2 (Generative Pre-trained Transformer 2) are two different types of transformer-based models, with ViT being primarily used for computer vision tasks and GPT-2 being primarily used for natural language processing tasks. While both models share similar transformer-based architectures, their input and output formats are quite different, and therefore it is not straightforward to convert a ViT model to a GPT-2 model.
