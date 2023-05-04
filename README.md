@@ -1,20 +1,20 @@
 # Image-Captioner-Using-Tensoflow
 
 ## To run the application
-## Initialize and activate a virtualenv using
+### Initialize and activate a virtualenv using
 ```
 python -m virtualenv venv
 source venv/Scripts/activate
 ```
-## to deactivate 
+### to deactivate 
 ```
 deactivate
 ```
-## Install the dependencies
+### Install the dependencies
 ```
 pip install -r requirements.txt
 ```
-## To run the development server
+## run the development server
 
 ```
 FLASK_APP=app.py
