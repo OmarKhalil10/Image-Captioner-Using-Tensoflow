@@ -59,8 +59,6 @@ The dataset is available for download from the website of the University of Illi
 
 [Flickr8k_text](https://github.com/jbrownlee/Datasets/releases/download/Flickr8k/Flickr8k_text.zip)
 
-## Image captioning with visual attention
-
 ### What is Image Captioning ?
 
 * Image Captioning is the process of generating textual description of an image. It uses both Natural Language Processing and Computer Vision to generate the captions.
