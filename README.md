@@ -131,10 +131,6 @@ Overall, the Flickr30k Image Caption Generator is a powerful tool for automatica
 
 [Flickr30k dataset](https://www.kaggle.com/datasets/hsankesara/flickr-image-dataset/download?datasetVersionNumber=1)
 
-### A comparison of the used datasets
-
-![comparison](/documentation/images/flickr30k/comparison-30k-8k.png)
-
 ### Modelling
 The model is based on encoder-decoder architecture. A two-dimensional convolutional neural network is used to encode the image features, and a one-dimensional
 convolutional neural network is used to encode the word sequences of the caption data. Later, both the encoded image and text features are merged and passed
@@ -172,3 +168,6 @@ To create an encoder-decoder model that can generate text from images, one possi
 
 This can be achieved by fine-tuning a pre-trained GPT-2 model on a dataset of paired image and text data, where the ViT model is used to extract the visual features from the images and the text is used as the decoder output. During training, the GPT-2 model learns to generate text that is conditioned on the visual features encoded by the ViT model.
 
+### A comparison of the used datasets
+
+![comparison](/documentation/images/flickr30k/comparison-30k-8k.png)
