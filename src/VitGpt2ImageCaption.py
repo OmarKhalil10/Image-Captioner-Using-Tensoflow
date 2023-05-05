@@ -1,4 +1,5 @@
-from transformers import VisionEncoderDecoderModel, ViTImageProcessor, AutoTokenizer
+from transformers import VisionEncoderDecoderModel, ViTImageProcessor, AutoTokenizer, pipeline
+
 import torch
 from PIL import Image
 

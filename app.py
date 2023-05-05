@@ -66,11 +66,13 @@ def create_app(test_config=None):
             path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             caption8k = caption_this_image(path)
 
-            result_dic = {
+            return jsonify({
                 'image' : path,
                 'description' : caption8k
-            }
-        return render_template('pages/caption.html', results = result_dic)
+            })
+        return jsonify({
+            'success': False
+            }), 405
 
     @app.route("/flickr30k", methods=["POST"])
     def up_file():
@@ -93,12 +95,14 @@ def create_app(test_config=None):
             path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             caption30k = runModel(path)
 
-            result_dic = {
+            return jsonify({
                 'image' : path,
                 'description' : caption30k
-            }
-        return render_template('pages/caption.html', results = result_dic)
-    
+            })
+        return jsonify({
+            'success': False
+            }), 405
+           
     @app.route("/VitGpt2ImageCaption", methods=["POST"])
     def upload_f():
         # check if the post request has the file part
@@ -125,12 +129,14 @@ def create_app(test_config=None):
             # Remove the square brackets and single quotes from the input string
             captiongpt = input_string.strip("[]'")
 
-            result_dic = {
+            return jsonify({
                 'image' : path,
                 'description' : captiongpt
-            }
-        return render_template('pages/caption.html', results = result_dic)
-
+            })
+        return jsonify({
+            'success': False
+            }), 405
+    
     @app.route('/uploads/<filename>')
     def uploaded_file(filename):
         return send_from_directory(app.config['UPLOAD_FOLDER'],

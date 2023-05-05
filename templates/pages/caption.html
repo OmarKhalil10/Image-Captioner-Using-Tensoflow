@@ -1,6 +1,6 @@
 {% extends 'layouts/main.html' %} {% block title %}Caption - ImageScribe{% endblock %}
 {% block content %}
-
+<link rel="stylesheet" href="/static/css/upload.css">
 <section class="home_banner_area">
   <div class="banner_inner" style="height: 100vh;">
     <div class="container">
@@ -11,25 +11,39 @@
               <input type="radio" name="option" value="option1" onchange="changeAction(this)"> Flickr8k
               <input type="radio" name="option" value="option2" onchange="changeAction(this)"> Flickr30k
               <input type="radio" name="option" value="option3" onchange="changeAction(this)"> Vit-Gpt2-Image-Captioning
-              <form id="myForm" class="form-inline" enctype="multipart/form-data" action="" method="POST">
-                <label><b>Image: &nbsp;&nbsp; </b></label>
-                <input type="file" class="form-control" name="image">
-                <button type="submit" class="btn btn-primary"> Submit</button>
-              </form>
+              <div class="col-lg-6">
+                <div class="checker_form" id="checker-form">
+                  <div class="drag-area row text-center justify-content-center">
+                    <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <header class="drag-drop">Drag & Drop to Upload File</header>
+                    <span>OR</span>
+                    <button class="upload-btn">Browse File</button>
+                    <input id="fileUpload" class="upload-file" type="file" hidden>
+                  </div>
+                  <div class="row">
+                    <div class="col button text-left">
+                      <button id="cancel-upload" onclick="cancelUpload()" class="submit_btn">Cancel</button>
+                    </div>
+                    <div class="col button text-right">
+                      <button id="myForm" onclick="submitUpload()" class="submit_btn">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div class="col-lg-6">
           <div class="banner_content">
-            {% if results %}
+
             <div class="col-sm-4">
-              <img style="height: 90%; width: 100%;" src="{{results.image}}">
+              <img id="image" style="height: 90%; width: 100%;" src="">
             </div>
             <div class="col-sm-8">
-              <p class="text">Generated Caption : </p>
-              <p><b> {{results.description}} </b> </p>
+              <p class="text">Generated Caption: </p>
+              <p id="caption"> </p>
             </div>
-            {% endif %}
+
           </div>
         </div>
       </div>
@@ -40,7 +54,134 @@
 {% endblock %}
 
 {% block script %}
+<script>
+  function submitUpload() {
+    // create a new FormData object and append the selected file and file name to it
+    var data = new FormData()
+    data.append('image', file)
+    data.append('name', fileName)
+
+    // set the URL based on the radio button selection
+    let url = ""
+
+    // get all radio buttons with name "option"
+    let radioButtons = document.getElementsByName("option");
+
+    // loop through the radio buttons to check which one is checked
+    for (let i = 0; i < radioButtons.length; i++) {
+      if (radioButtons[i].checked) {
+        // set the URL based on the checked radio button
+        if (radioButtons[i].value === "option1") {
+          url = "/flickr8k"
+        } else if (radioButtons[i].value === "option2") {
+          url = "/flickr30k"
+        } else if (radioButtons[i].value === "option3") {
+          url = "/VitGpt2ImageCaption"
+        }
+        break;
+      }
+    }
+
+    // send the selected file to the backend for processing
+    fetch(url, {
+      method: 'POST',
+      body: data,
+      headers: {
+        'Accept': 'application/json'
+      }
+    })
+      .then(function (response) {
+        // Check the Content-Type header of the response
+        let contentType = response.headers.get('Content-Type');
+        if (contentType && contentType.includes('application/json')) {
+          // Parse the JSON response
+          return response.json();
+        } else {
+          // Handle the response as plain text
+          return response.text();
+        }
+      })
+      .then(function (res) {
+        // If the response is JSON
+        if (typeof res === 'object') {
+          let text = res.description;
+          let img = res.image;
+          document.getElementById("caption").innerText = text;
+          document.getElementById("image").src = img;
+        } else { // If the response is plain text
+          console.log('Received plain text response:', res);
+          // Handle the plain text response as needed
+        }
+      })
+      .catch(function (error) {
+        console.log('Error:', error);
+      });
+  }
+  function cancelUpload() {
+    //selecting all required elements
+    var dropArea = document.querySelector(".drag-area");
+    var uploadedImage = dropArea.querySelector("#uploaded-image");
+    var newArea = `<div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <header class="drag-drop">Drag & Drop to Upload File</header>
+                    <span>OR</span>
+                    <button class="upload-btn">Browse File</button>
+                    <input id="fileUpload" class="upload-file" type="file" hidden>`;
+    dropArea.classList.remove("active");
+    dropArea.removeChild(uploadedImage);
+    dropArea.insertAdjacentHTML("afterbegin", newArea);
+    var dragText = dropArea.querySelector(".drag-drop");
+    var button = dropArea.querySelector(".upload-btn");
+    var input = dropArea.querySelector(".upload-file");
+    button.onclick = () => {
+      input.click(); //if user click on the button then the input also clicked
+    }
+    input.addEventListener("change", function () {
+      //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+      file = this.files[0];
+      fileName = file.name;
+      dropArea.classList.add("active");
+      showFile(); //calling function
+    });
+    //If user Drag File Over DropArea
+    dropArea.addEventListener("dragover", (event) => {
+      event.preventDefault(); //preventing from default behaviour
+      dropArea.classList.add("active");
+      dragText.textContent = "Release to Upload File";
+    });
+    //If user leave dragged File from DropArea
+    dropArea.addEventListener("dragleave", () => {
+      dropArea.classList.remove("active");
+      dragText.textContent = "Drag & Drop to Upload File";
+    });
+    //If user drop File on DropArea
+    dropArea.addEventListener("drop", (event) => {
+      event.preventDefault(); //preventing from default behaviour
+      //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+      file = event.dataTransfer.files[0];
+      fileName = file.name;
+      showFile(); //calling function
+    });
+    function showFile() {
+      let fileType = file.type; //getting selected file type
+      let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; //adding some valid image extensions in array
+      if (validExtensions.includes(fileType)) { //if user selected file is an image file
+        let fileReader = new FileReader(); //creating new FileReader object
+        fileReader.onload = () => {
+          let fileURL = fileReader.result; //passing user file source in fileURL variable
+          let imgTag = `<img id="uploaded-image" src="${fileURL}" alt="${file.name}">`; //creating an img tag and passing user selected file source inside src attribute
+          dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
+        }
+        fileReader.readAsDataURL(file);
+      } else {
+        alert("This is not an Image File!");
+        dropArea.classList.remove("active");
+        dragText.textContent = "Drag & Drop to Upload File";
+      }
+    }
+  };
+</script>
 <script src="/static/js/change-action.js"></script>
+<script src="/static/js/upload.js"></script>
 <script src="/static/js/imagesloaded.pkgd.min.js"></script>
 <script src="/static/js/isotope-min.js"></script>
 <script src="/static/js/js.js"></script>
