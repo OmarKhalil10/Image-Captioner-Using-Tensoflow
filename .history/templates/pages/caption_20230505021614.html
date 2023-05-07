@@ -1,0 +1,61 @@
+{% extends 'layouts/main.html' %} 
+{% block title %}Caption - ImageScribe{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="/static/css/dragDropArea.css">
+<section class="home_banner_area">
+  <div class="banner_inner" style="height: 100vh;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="home_left_img">
+            <div class="container">
+              <input type="radio" name="option" value="option1" onchange="changeAction(this)"> Flickr8k
+              <input type="radio" name="option" value="option2" onchange="changeAction(this)"> Flickr30k
+              <input type="radio" name="option" value="option3" onchange="changeAction(this)"> Vit-Gpt2-Image-Captioning
+
+              <form id="myForm" class="form-inline" enctype="multipart/form-data" action="" method="POST">
+                <label><b>Image: &nbsp;&nbsp; </b></label>
+                <div class="drag-area">
+                  <input id="browse" type="file" class="form-control" name="image" hidden>
+                  <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                  <header>Drag & Drop to Upload File</header>
+                  <span>OR</span>
+                  <label for="browse">Browse Files</label>
+                  <div class="image-preview"></div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="banner_content">
+            {% if results %}
+            <div class="col-sm-4">
+              <img style="height: 90%; width: 100%;" src="{{results.image}}">
+            </div>
+            <div class="col-sm-8">
+              <p class="text">Generated Caption : </p>
+              <p><b> {{results.description}} </b> </p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block script %}
+<script src="/static/js/change-action.js"></script>
+<script src="/static/js/imagesloaded.pkgd.min.js"></script>
+<script src="/static/js/isotope-min.js"></script>
+<script src="/static/js/js.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/static/js/drag-drop.js"></script>
+<script src="/static/js/upload.js"></script>
+{% endblock %}

@@ -46,6 +46,14 @@ function showFile(){
   }else{
     alert("This is not an Image File!");
     dropArea.classList.remove("active");
-    dragText.textContent = "Drag & Drop to Upload File";
-  }
+    dragText.textContent = "Drag & Drop to Upload File";
+  }
 }
+function submitUpload(){
+  // your code start here
+  var data = new FormData()
+  data.append('files', file) // maybe it should be '{target}_cand'
+  data.append('name', file.name)
+  url= document.getElementById("submit-upload").action.value;
+
+};

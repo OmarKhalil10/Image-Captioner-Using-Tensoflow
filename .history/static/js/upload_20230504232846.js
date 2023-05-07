@@ -1,15 +1,16 @@
+//from https://www.codingnepalweb.com/drag-drop-file-upload-feature-javascript/
 //selecting all required elements
-var dropArea = document.querySelector(".drag-area"),
-dragText = dropArea.querySelector(".drag-drop"),
-button = dropArea.querySelector(".upload-btn"),
-input = dropArea.querySelector(".upload-file");
+const dropArea = document.querySelector(".drag-area"),
+dragText = dropArea.querySelector("header"),
+button = dropArea.querySelector("button"),
+input = dropArea.querySelector("input");
+let file; //this is a global variable and we'll use it inside multiple functions
 button.onclick = ()=>{
   input.click(); //if user click on the button then the input also clicked
 }
 input.addEventListener("change", function(){
   //getting user select file and [0] this means if user select multiple files then we'll select only the first one
   file = this.files[0];
-  fileName = file.name;
   dropArea.classList.add("active");
   showFile(); //calling function
 });
@@ -29,7 +30,6 @@ dropArea.addEventListener("drop", (event)=>{
   event.preventDefault(); //preventing from default behaviour
   //getting user select file and [0] this means if user select multiple files then we'll select only the first one
   file = event.dataTransfer.files[0];
-  fileName = file.name;
   showFile(); //calling function
 });
 function showFile(){
@@ -39,7 +39,8 @@ function showFile(){
     let fileReader = new FileReader(); //creating new FileReader object
     fileReader.onload = ()=>{
       let fileURL = fileReader.result; //passing user file source in fileURL variable
-      let imgTag = `<img id="uploaded-image" src="${fileURL}" alt="${file.name}">`; //creating an img tag and passing user selected file source inside src attribute
+        // UNCOMMENT THIS BELOW LINE. I GOT AN ERROR WHILE UPLOADING THIS POST SO I COMMENTED IT
+       let imgTag = `<img src="${fileURL}" alt="image">`; //creating an img tag and passing user selected file source inside src attribute
       dropArea.innerHTML = imgTag; //adding that created img tag inside dropArea container
     }
     fileReader.readAsDataURL(file);
