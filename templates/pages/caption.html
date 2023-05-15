@@ -2,7 +2,7 @@
 {% block content %}
 <link rel="stylesheet" href="/static/css/upload.css">
 <section class="home_banner_area">
-  <div class="banner_inner" style="height: 100vh;">
+  <div class="banner_inner">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
@@ -25,7 +25,7 @@
                       <button id="cancel-upload" onclick="cancelUpload()" class="submit_btn">Cancel</button>
                     </div>
                     <div class="col button text-right">
-                      <button id="myForm" onclick="submitUpload()" class="submit_btn">Submit</button>
+                      <button id="myForm" onclick="submitUpload()" class="cancel_btn">Submit</button>
                     </div>
                   </div>
                 </div>
@@ -35,13 +35,27 @@
         </div>
         <div class="col-lg-6">
           <div class="banner_content">
-
+            
+            <!--
             <div class="col-sm-4">
-              <img id="image" style="height: 90%; width: 100%;" src="">
+              <img id="image" style="height: 70%; width: 70%;" src="">
             </div>
             <div class="col-sm-8">
               <p class="text">Generated Caption: </p>
               <p id="caption"> </p>
+            </div>
+            -->
+
+            <div class="card" style="width: 18rem;">
+              <img id="image" class="card-img-top" src="/static/images/waiting.gif" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title text-danger">Output Caption</h5>
+                <div style="margin-bottom: 10px;" class='console-container'>
+                  <span id="caption" class="card-text text-dark"> </span>
+                  <div class='console-underscore' id='console'>&#95;</div>
+                </div>
+                <a id="reset-button" href="#" class="btn btn-primary">Reset Image</a>
+              </div>
             </div>
 
           </div>
@@ -106,7 +120,55 @@
         if (typeof res === 'object') {
           let text = res.description;
           let img = res.image;
-          document.getElementById("caption").innerText = text;
+
+          //document.getElementById("caption").innerText = text; // display the caption directly on the page
+          
+          // Note: The reset function acceletate the _ in the caption --> find the root cause and solve it
+          
+          resetButton.click();
+          consoleText([text], 'text', ['lightblue']);
+
+          function consoleText(words, id, colors) {
+            if (colors === undefined) colors = ['#fff'];
+            var visible = true;
+            var con = document.getElementById('console');
+            var letterCount = 1;
+            var x = 1;
+            var waiting = false;
+            var target = document.getElementById('caption')
+            target.setAttribute('style', 'color:' + colors[0])
+            window.setInterval(function () {
+
+              if (letterCount === 0 && waiting === false) {
+                waiting = true;
+                target.innerHTML = words[0].substring(0, letterCount)
+                window.setTimeout(function () {
+                  var usedColor = colors.shift();
+                  colors.push(usedColor);
+                  var usedWord = words.shift();
+                  words.push(usedWord);
+                  x = 1;
+                  target.setAttribute('style', 'color:' + colors[0])
+                  letterCount += x;
+                  waiting = false;
+                }, 1000)
+              } else if (waiting === false) {
+                target.innerHTML = words[0].substring(0, letterCount)
+                letterCount += x;
+              }
+            }, 100)
+            window.setInterval(function () {
+              if (visible === true) {
+                con.className = 'console-underscore hidden'
+                visible = false;
+
+              } else {
+                con.className = 'console-underscore'
+
+                visible = true;
+              }
+            }, 400)
+          }
           document.getElementById("image").src = img;
         } else { // If the response is plain text
           console.log('Received plain text response:', res);
@@ -180,10 +242,42 @@
     }
   };
 </script>
+<script>
+const cardImage = document.getElementById("image");
+const resetButton = document.getElementById("reset-button");
+const consoleContainer = document.querySelector('.console-container');
+let captionElement = document.getElementById('caption');
+
+resetButton.addEventListener("click", function () {
+  cardImage.src = "/static/images/waiting.gif";
+  
+  // Remove the existing caption element and recreate it
+  captionElement.remove();
+  captionElement = document.createElement('span');
+  captionElement.id = 'caption';
+  captionElement.classList.add('card-text', 'text-dark');
+  consoleContainer.prepend(captionElement);
+  
+  // Reset the content of the console element
+  const consoleElement = document.getElementById('console');
+  consoleElement.textContent = '_';
+});
+</script>
+<!--
+<script>
+function resetAndSetText(newText) {
+  consoleText([newText], 'text', ['lightblue']);
+}
+resetAndSetText("Initial text");
+resetButton.addEventListener("click", function() {
+  var newText = "New text";
+  resetAndSetText(newText);
+});
+</script>
+-->
+<script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/change-action.js"></script>
+<script src="/static/js/darkmode.js"></script>
 <script src="/static/js/upload.js"></script>
-<script src="/static/js/imagesloaded.pkgd.min.js"></script>
-<script src="/static/js/isotope-min.js"></script>
 <script src="/static/js/js.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 {% endblock %}

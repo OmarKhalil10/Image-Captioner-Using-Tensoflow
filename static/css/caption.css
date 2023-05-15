@@ -1,23 +1,17 @@
-.input-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+.hidden {
+  opacity:0;
 }
-
-.input-container label {
-  margin-right: 10px;
+.console-container {
+  color:rgb(0, 0, 0);
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
 }
-
-.input-container .tooltip {
-  display: none;
-  position: absolute;
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  z-index: 1;
-}
-
-.input-container input:hover + .tooltip {
-  display: block;
+.console-underscore {
+  display:inline-block;
+  position:relative;
+  top:-0.14em;
+  left:5px;
 }
