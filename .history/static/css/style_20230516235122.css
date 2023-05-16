@@ -182,7 +182,7 @@ img {
     box-shadow: 0px 10px 30px rgba(130, 82, 250, 0.2); }
 
 .primary_btn {
-  display: inline-block !important;
+  display: inline-block;
   background: -webkit-linear-gradient(to right, #3fcaff 0%, #a4ffb0 51%, #3fcaff 100%);
   background: -moz-linear-gradient(to right, #3fcaff 0%, #a4ffb0 51%, #3fcaff 100%);
   background: -ms-linear-gradient(to right, #3fcaff 0%, #a4ffb0 51%, #3fcaff 100%);
@@ -302,11 +302,6 @@ img {
     width: 100%; }
     .header_area .navbar .nav .nav-item {
       margin-right: 45px; }
-      .header_area .navbar .nav .nav-item:hover{
-        Color:#3fcaff;
-        font-size: 13px;
-        font-weight: bold;
-      }
       .header_area .navbar .nav .nav-item .nav-link {
         font: 500 12px/100px "Roboto", sans-serif;
         text-transform: uppercase;
@@ -316,7 +311,7 @@ img {
         .header_area .navbar .nav .nav-item .nav-link:after {
           display: none; }
       .header_area .navbar .nav .nav-item:hover .nav-link, .header_area .navbar .nav .nav-item.active .nav-link {
-        color: #fff; }
+        color: #3fcaff; }
       .header_area .navbar .nav .nav-item.submenu {
         position: relative; }
         .header_area .navbar .nav .nav-item.submenu ul {
@@ -2739,7 +2734,7 @@ h6 {
   /* End Home Banner Area css
   ============================================================================================ */
   .header_area .navbar .primary_btn {
-    margin-left: 0px; }
+    margin-left: 40px; }
 
   .home_banner_area .banner_inner .banner_content h2 br {
     display: none;
