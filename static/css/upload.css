@@ -69,3 +69,27 @@
   object-fit: cover;
   border-radius: 5px;
 }
+.submit_btn{
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #5256ad;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cancel_btn{
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #ca0c2f;
+  border-radius: 5px;
+  cursor: pointer;
+}

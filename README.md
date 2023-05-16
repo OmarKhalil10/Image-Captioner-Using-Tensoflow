@@ -18,8 +18,8 @@ pip install -r requirements.txt
 
 ```
 FLASK_APP=app.py
-FLASK_ENV=development
-FLASK_DEBUG=true
+set FLASK_ENV=development
+set FLASK_DEBUG=true
 flask run --reload
 ```
 
@@ -171,3 +171,13 @@ This can be achieved by fine-tuning a pre-trained GPT-2 model on a dataset of pa
 ### A comparison of the used datasets
 
 ![comparison](/documentation/images/flickr30k/comparison-30k-8k.png)
+
+
+### Future Work
+
+- [ ] The reset function acceletate the _ in the caption --> find the root cause and solve it 
+- [ ] Fix the resposnibe view in caption and home pages
+- [ ] Fix the Burger icon --> it does't expand
+- [ ] Fix the spaicng between input and output in the caption page
+- [ ] Find the correct way to display the effect of dark/light theme
+- [ ] Try to make the sizing between the i/p and o/p suitable

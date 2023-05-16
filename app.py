@@ -126,8 +126,8 @@ def create_app(test_config=None):
 
             # Extract the string from the input list
             input_string = VitGpt2ImageCaption[0]
-            # Remove the square brackets and single quotes from the input string
-            captiongpt = input_string.strip("[]'")
+            # Remove the square brackets and single quotes from the input string  
+            captiongpt = input_string
 
             return jsonify({
                 'image' : path,
