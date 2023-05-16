@@ -18,8 +18,8 @@ pip install -r requirements.txt
 
 ```
 FLASK_APP=app.py
-FLASK_ENV=development
-FLASK_DEBUG=true
+set FLASK_ENV=development
+set FLASK_DEBUG=true
 flask run --reload
 ```
 
