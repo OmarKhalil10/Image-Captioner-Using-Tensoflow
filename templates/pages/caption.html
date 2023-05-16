@@ -1,18 +1,61 @@
 {% extends 'layouts/main.html' %} {% block title %}Caption - ImageScribe{% endblock %}
 {% block content %}
 <link rel="stylesheet" href="/static/css/upload.css">
-<section class="home_banner_area">
   <div class="banner_inner">
+    <section class="home_banner_area">
+
+      <div style="margin-top: 80px;" class="container mt-5">
+      <div style="background: none;" class="jumbotron">
+        <h1 style="text-align: center; color: white;" class="display-4">Welcome to our captioner!</h1>
+        <p style="text-align: center; color: white;" class="lead">Generating Descriptive Image Captions Using Deep Learning In Seconds.
+        </p>
+        <hr style="background-color: white;" class="my-4">
+        <p style="text-align: center;" class="lead">
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+            Launch demo modal
+          </button>
+        </p>
+      </div>
+    
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Dolorum id, vitae provident cumque non rerum quas suscipit necessitatibus a.
+              Culpa minima pariatur nam harum tenetur quis nemo qui molestias enim?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="container">
-      <div class="row">
+      <div class="row">        
         <div class="col-lg-6">
           <div class="home_left_img">
+
             <div class="container">
               <input type="radio" name="option" value="option1" onchange="changeAction(this)"> Flickr8k
               <input type="radio" name="option" value="option2" onchange="changeAction(this)"> Flickr30k
               <input type="radio" name="option" value="option3" onchange="changeAction(this)"> Vit-Gpt2-Image-Captioning
               <div class="col-lg-6">
+
+                <!--start of checker_form-->
                 <div class="checker_form" id="checker-form">
+
                   <div class="drag-area row text-center justify-content-center">
                     <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
                     <header class="drag-drop">Drag & Drop to Upload File</header>
@@ -20,50 +63,65 @@
                     <button class="upload-btn">Browse File</button>
                     <input id="fileUpload" class="upload-file" type="file" hidden>
                   </div>
-                  <div class="row">
-                    <div class="col button text-left">
+
+                  <!--start of submit and cancel buttons-->
+                  <div class="row justify-content-end">
+                    <div class="col-4">
                       <button id="cancel-upload" onclick="cancelUpload()" class="submit_btn">Cancel</button>
                     </div>
-                    <div class="col button text-right">
+                    <div class="col-4">
                       <button id="myForm" onclick="submitUpload()" class="cancel_btn">Submit</button>
                     </div>
                   </div>
+                  <!--end of submit and cancel buttons-->
                 </div>
+                <!--end of checker_form-->
+
               </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-6">
-          <div class="banner_content">
-            
-            <!--
-            <div class="col-sm-4">
-              <img id="image" style="height: 70%; width: 70%;" src="">
-            </div>
-            <div class="col-sm-8">
-              <p class="text">Generated Caption: </p>
-              <p id="caption"> </p>
-            </div>
-            -->
 
+        <div class="col-lg-6">
+          <div class="container">
             <div class="card" style="width: 18rem;">
               <img id="image" class="card-img-top" src="/static/images/waiting.gif" alt="Card image cap">
               <div class="card-body">
-                <h5 class="card-title text-danger">Output Caption</h5>
+                <h5 class="text-danger">Output Caption</h5>
                 <div style="margin-bottom: 10px;" class='console-container'>
                   <span id="caption" class="card-text text-dark"> </span>
                   <div class='console-underscore' id='console'>&#95;</div>
                 </div>
                 <a id="reset-button" href="#" class="btn btn-primary">Reset Image</a>
+                <a id="load-button" href="#" class="btn btn-primary">Load Caption</a><br>
+                <hr>
+                <form method="POST">
+                  <div class="form-group">
+                    <textarea name="text" cols="5" rows="3" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label style="color: black;" for="language">Language:</label>
+                    <select name="language" class="form-control">
+                      <option value="en">English</option>
+                      <option value="ar">Arabic</option>
+                      <option value="it">Italian</option>
+                      <option value="ja">Japanese</option>
+                      <option value="ru">Russian</option>
+                      <option value="de">German</option>
+                    </select>
+                  </div>
+                  <div>
+                    <button type="submit" class="btn btn-success">Translate!</button>
+                  </div>
+                </form>
               </div>
             </div>
-
           </div>
         </div>
+
       </div>
     </div>
-  </div>
-  </div>
+
 </section>
 {% endblock %}
 
@@ -122,9 +180,9 @@
           let img = res.image;
 
           //document.getElementById("caption").innerText = text; // display the caption directly on the page
-          
+
           // Note: The reset function acceletate the _ in the caption --> find the root cause and solve it
-          
+
           resetButton.click();
           consoleText([text], 'text', ['lightblue']);
 
@@ -170,6 +228,19 @@
             }, 400)
           }
           document.getElementById("image").src = img;
+
+          // reference to the <a> element with the id "load-button"
+          var textareaElement = document.querySelector('textarea[name="text"].form-control');
+          var loadButton = document.getElementById('load-button');
+
+          // Add an event listener to the button
+          loadButton.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default behavior of the link (e.g., navigating to another page)
+
+            var textareaElement = document.querySelector('textarea[name="text"].form-control');
+            textareaElement.value = text; // Append the value to the <textarea>
+          });
+
         } else { // If the response is plain text
           console.log('Received plain text response:', res);
           // Handle the plain text response as needed
@@ -243,38 +314,34 @@
   };
 </script>
 <script>
-const cardImage = document.getElementById("image");
-const resetButton = document.getElementById("reset-button");
-const consoleContainer = document.querySelector('.console-container');
-let captionElement = document.getElementById('caption');
+  const cardImage = document.getElementById("image");
+  const resetButton = document.getElementById("reset-button");
+  const consoleContainer = document.querySelector('.console-container');
+  let captionElement = document.getElementById('caption');
+  var textareaElement = document.querySelector('textarea[name="text"].form-control');
 
-resetButton.addEventListener("click", function () {
-  cardImage.src = "/static/images/waiting.gif";
-  
-  // Remove the existing caption element and recreate it
-  captionElement.remove();
-  captionElement = document.createElement('span');
-  captionElement.id = 'caption';
-  captionElement.classList.add('card-text', 'text-dark');
-  consoleContainer.prepend(captionElement);
-  
-  // Reset the content of the console element
-  const consoleElement = document.getElementById('console');
-  consoleElement.textContent = '_';
-});
+  resetButton.addEventListener("click", function () {
+    cardImage.src = "/static/images/waiting.gif";
+    textareaElement.value = ""; // Append the value to the <textarea>
+
+    // Remove the existing caption element and recreate it
+    captionElement.remove();
+    captionElement = document.createElement('span');
+    captionElement.id = 'caption';
+    captionElement.classList.add('card-text', 'text-dark');
+    consoleContainer.prepend(captionElement);
+
+    // Reset the content of the console element
+    const consoleElement = document.getElementById('console');
+    consoleElement.textContent = '_';
+  });
 </script>
-<!--
-<script>
-function resetAndSetText(newText) {
-  consoleText([newText], 'text', ['lightblue']);
-}
-resetAndSetText("Initial text");
-resetButton.addEventListener("click", function() {
-  var newText = "New text";
-  resetAndSetText(newText);
-});
-</script>
--->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="/static/js/bootstrap.min.js"></script>
 <script src="/static/js/change-action.js"></script>
 <script src="/static/js/darkmode.js"></script>

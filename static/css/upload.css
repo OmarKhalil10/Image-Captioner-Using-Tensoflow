@@ -1,8 +1,8 @@
 .drag-area{
   border: 2px dashed #fff;
   border-radius: 10px;
-  height: 400px;
-  width: 400px;
+  height: 360px;
+  width: 360px;
   display: flex;
   align-items: center;
   justify-content: center;

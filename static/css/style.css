@@ -405,7 +405,8 @@ img {
 .home_banner_area {
   z-index: 1;
   background: url(../images/home-banner.jpg) no-repeat center center;
-  background-size: cover; }
+  background-size: cover; 
+  height: 160vh; }
   .home_banner_area .banner_inner {
     width: 100%; }
     .home_banner_area .banner_inner .home_left_img {
