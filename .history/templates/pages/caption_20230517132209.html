@@ -23,32 +23,19 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Demo</h5>
+              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div  class="modal-body">
-              <p>
-              Welcome to our image captioning website!<br>
-               With our innovative platform, 
-              you can easily generate captions for your images.<br> 
-              Simply upload a photo by clicking the browse button or drag and drop it onto the designated area. <br>
-              Once you've selected your image, click the submit button to generate automatic captions.<br>
-              Our cutting-edge technology will analyze the contents of the image and provide descriptive captions that capture the essence of what's depicted. 
-              From beautiful landscapes to adorable pets, 
-              our image captioning system strives to deliver accurate and engaging descriptions.<br>
-              Additionally, you have the option to save and load captions for future reference.<br> 
-              If you're looking to translate the generated caption into a different language, 
-              our website also provides a seamless translation feature. 
-              You can effortlessly convert captions into the language of your choice, 
-              allowing you to reach a broader audience and enhance communication.<br>
-              Experience the power of image captioning and translation with our user-friendly website. <br>
-              Start exploring the endless possibilities today!<br>
-              </p>
+            <div class="modal-body">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Dolorum id, vitae provident cumque non rerum quas suscipit necessitatibus a.
+              Culpa minima pariatur nam harum tenetur quis nemo qui molestias enim?
             </div>
             <div class="modal-footer">
-              <button type="button" class="primary_btn" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
         </div>
@@ -61,9 +48,9 @@
           <div class="home_left_img">
 
             <div class="container">
-              <input type="radio" name="option" value="option1" onchange="changeAction(this)"> <label>Flickr8k</label>
-              <input type="radio" name="option" value="option2" onchange="changeAction(this)"> <label>Flickr30k</label>
-              <input type="radio" name="option" value="option3" onchange="changeAction(this)"> <label>Vit-Gpt2-Image-Captioning</label>
+              <input type="radio" name="option" value="option1" onchange="changeAction(this)"> Flickr8k
+              <input type="radio" name="option" value="option2" onchange="changeAction(this)"> Flickr30k
+              <input type="radio" name="option" value="option3" onchange="changeAction(this)"> Vit-Gpt2-Image-Captioning
               <div class="col-lg-6">
 
                 <!--start of checker_form-->
@@ -78,9 +65,13 @@
                   </div>
 
                   <!--start of submit and cancel buttons-->
-                  <div class="buttons-container">
-                      <button id="cancel-upload" onclick="cancelUpload()" class="cancel_btn primary_btn">Cancel</button>
-                      <button id="myForm" onclick="submitUpload()" class="submit_btn primary_btn">Submit</button>
+                  <div class="row justify-content-end">
+                    <div class="col-4">
+                      <button id="cancel-upload" onclick="cancelUpload()" class="submit_btn">Cancel</button>
+                    </div>
+                    <div class="col-4">
+                      <button id="myForm" onclick="submitUpload()" class="cancel_btn">Submit</button>
+                    </div>
                   </div>
                   <!--end of submit and cancel buttons-->
                 </div>
@@ -91,25 +82,25 @@
           </div>
         </div>
 
-        <div class="col-lg-16">
+        <div class="col-lg-6">
           <div class="container">
             <div class="card" style="width: 18rem;">
               <img id="image" class="card-img-top" src="/static/images/waiting.gif" alt="Card image cap">
               <div class="card-body">
-                <h5 class="text-danger" >Output Caption</h5>
+                <h5 class="text-danger">Output Caption</h5>
                 <div style="margin-bottom: 10px;" class='console-container'>
                   <span id="caption" class="card-text text-dark"> </span>
                   <div class='console-underscore' id='console'>&#95;</div>
                 </div>
-                <a id="reset-button"  class="resetCard">Reset Image</a>
-                <a id="load-button"  class="loadCard">Load Caption</a><br>
+                <a id="reset-button" href="#" class="btn btn-primary">Reset Image</a>
+                <a id="load-button" href="#" class="btn btn-primary">Load Caption</a><br>
                 <hr>
                 <form method="POST">
                   <div class="form-group">
                     <textarea name="text" cols="5" rows="3" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
-                    <label style="color: rgb(64, 64, 64);" for="language">Language:</label>
+                    <label style="color: black;" for="language">Language:</label>
                     <select name="language" class="form-control">
                       <option value="en">English</option>
                       <option value="ar">Arabic</option>
@@ -120,7 +111,7 @@
                     </select>
                   </div>
                   <div>
-                    <button type="submit" class="translateButton primary-btn">Translate!</button>
+                    <button type="submit" class="btn btn-success">Translate!</button>
                   </div>
                 </form>
               </div>

@@ -1,0 +1,87 @@
+.drag-area{
+  border: 2px dashed #fff;
+  border-radius: 10px;
+  height: 360px;
+  width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.drag-area.active{
+  border: 2px solid #fff;
+}
+.drag-area .icon{
+  font-size: 50px;
+  color: #fff;
+}
+.drag-area header{
+  font-size: 20px;
+  font-weight: 400;
+  color: #fff;
+}
+.drag-area span{
+  font-size: 25px;
+  font-weight: 400;
+  color: #fff;
+  margin: 10px 0 15px 0;
+}
+.drag-area button{
+  padding: 10px 25px;
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #5256ad;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.drag-area img{
+  height: 150%;
+  width: 150%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.submit_btn{
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #5256ad;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.cancel_btn{
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #ca0c2f;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.container label{
+  color:black;
+  font-size: 20px;
+}
+.modal-header{
+  background-color:#1213269d;
+
+}
+.modal-body{
+  background-color:#282a55;
+}
+.modal-body p{
+  color:#aaa;
+  font:15px;
+  font-weight: lighter;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+

@@ -1,4 +1,6 @@
 .row{
+  height:auto;
+  width: auto;
   justify-content: space-between;
 }
 .drag-area{
@@ -223,7 +225,7 @@
 }
 .translateButton:hover{
   background: gainsboro;
-  color: #000;
+  color: #fff;
   font-size: 17px;
   font-weight: bold;
 }

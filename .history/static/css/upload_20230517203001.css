@@ -1,4 +1,6 @@
 .row{
+  height:auto;
+  width: auto;
   justify-content: space-between;
 }
 .drag-area{
@@ -186,17 +188,17 @@
   font-weight: 400;
   border: none;
   outline: none;
-  background:gainsboro;
-  color: #FFF;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.loadCard:hover{
   background: -webkit-linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
   background: -moz-linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
   background: -ms-linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
   background: -o-linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
   background: linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
+  color: #FFF;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.loadCard:hover{
+  background: #3fcaff;
   color: #fff;
   font-size: 17px;
   font-weight: bold;
@@ -222,8 +224,8 @@
   cursor: pointer;
 }
 .translateButton:hover{
-  background: gainsboro;
-  color: #000;
+  background: #3fcaff;
+  color: #fff;
   font-size: 17px;
   font-weight: bold;
 }

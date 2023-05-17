@@ -28,8 +28,7 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div  class="modal-body">
-              <p>
+            <div class="modal-body">
               Welcome to our image captioning website!<br>
                With our innovative platform, 
               you can easily generate captions for your images.<br> 
@@ -43,12 +42,11 @@
               our website also provides a seamless translation feature. 
               You can effortlessly convert captions into the language of your choice, 
               allowing you to reach a broader audience and enhance communication.<br>
-              Experience the power of image captioning and translation with our user-friendly website. <br>
+              Experience the power of image captioning and translation with our user-friendly website. |<br>
               Start exploring the endless possibilities today!<br>
-              </p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="primary_btn" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -78,9 +76,13 @@
                   </div>
 
                   <!--start of submit and cancel buttons-->
-                  <div class="buttons-container">
-                      <button id="cancel-upload" onclick="cancelUpload()" class="cancel_btn primary_btn">Cancel</button>
-                      <button id="myForm" onclick="submitUpload()" class="submit_btn primary_btn">Submit</button>
+                  <div class="row justify-content-end">
+                    <div class="col-4">
+                      <button id="cancel-upload" onclick="cancelUpload()" class="submit_btn">Cancel</button>
+                    </div>
+                    <div class="col-4">
+                      <button id="myForm" onclick="submitUpload()" class="cancel_btn">Submit</button>
+                    </div>
                   </div>
                   <!--end of submit and cancel buttons-->
                 </div>
@@ -91,25 +93,25 @@
           </div>
         </div>
 
-        <div class="col-lg-16">
+        <div class="col-lg-6">
           <div class="container">
             <div class="card" style="width: 18rem;">
               <img id="image" class="card-img-top" src="/static/images/waiting.gif" alt="Card image cap">
               <div class="card-body">
-                <h5 class="text-danger" >Output Caption</h5>
+                <h5 class="text-danger">Output Caption</h5>
                 <div style="margin-bottom: 10px;" class='console-container'>
                   <span id="caption" class="card-text text-dark"> </span>
                   <div class='console-underscore' id='console'>&#95;</div>
                 </div>
-                <a id="reset-button"  class="resetCard">Reset Image</a>
-                <a id="load-button"  class="loadCard">Load Caption</a><br>
+                <a id="reset-button" href="#" class="btn btn-primary">Reset Image</a>
+                <a id="load-button" href="#" class="btn btn-primary">Load Caption</a><br>
                 <hr>
                 <form method="POST">
                   <div class="form-group">
                     <textarea name="text" cols="5" rows="3" class="form-control"></textarea>
                   </div>
                   <div class="form-group">
-                    <label style="color: rgb(64, 64, 64);" for="language">Language:</label>
+                    <label style="color: black;" for="language">Language:</label>
                     <select name="language" class="form-control">
                       <option value="en">English</option>
                       <option value="ar">Arabic</option>
@@ -120,7 +122,7 @@
                     </select>
                   </div>
                   <div>
-                    <button type="submit" class="translateButton primary-btn">Translate!</button>
+                    <button type="submit" class="btn btn-success">Translate!</button>
                   </div>
                 </form>
               </div>

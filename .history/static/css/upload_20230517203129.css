@@ -1,4 +1,6 @@
 .row{
+  height:auto;
+  width: auto;
   justify-content: space-between;
 }
 .drag-area{

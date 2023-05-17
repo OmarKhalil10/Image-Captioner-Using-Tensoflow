@@ -1,11 +1,13 @@
 .row{
+  height:auto;
+  width: auto;
   justify-content: space-between;
 }
 .drag-area{
   border: 2px dashed #fff;
   border-radius: 30px;
   height: 400px;
-  width: 480px;
+  width: 450px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,22 +68,20 @@
   height: 100%;
   width: 100%;
   object-fit: fill;
-  border-radius: 30px;
+  border-radius: 5px;
 }
 /*for buttons Location*/
 .checker_form{
-  width:455px;
+  width:420px;
 }
 .drag-area .buttons-container {
   display: flex;
-  width:300px;
   justify-content: space-between;
   margin-top: 10px;
 }
 
 .submit_btn{
   margin-top: 10px;
-  margin-left: 20px;
   padding: 5px 10px;
   font-size: 20px;
   font-weight: 400;
@@ -151,79 +151,7 @@
 .col-lg-16{
   float:right;
 }
-.container label{
-  color:rgb(6, 2, 25);
-  font-weight: bold;
-}
-.resetCard{
-  width: 35px;
-  margin-top: 10px;
-  padding: 5px 10px;
-  font-size: 16px;
-  font-weight: 400;
-  border: none;
-  outline: none;
-  background :gainsboro;
-  color: #000;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.resetCard:hover{
-  background: -webkit-linear-gradient(to right, #696fba 0%, #8a8db6 51%, #e7e7ed 100%);
-  background: -moz-linear-gradient(to right, #696fba 0%, #8a8db6 51%, #e7e7ed 100%);
-  background: -ms-linear-gradient(to right, #696fba 0%, #8a8db6 51%, #e7e7ed 100%);
-  background: -o-linear-gradient(to right, #696fba 0%, #8a8db6 51%, #e7e7ed 100%);
-  background: linear-gradient(to right, #696fba 0%, #8a8db6 51%, #e7e7ed 100%);
-  color: #fff;
-  font-size: 17px;
-  font-weight: bold;
-}
-.loadCard{
-  margin-top: 10px;
-  margin-left: 5px;
-  padding: 5px 10px;
-  font-size: 16px;
-  font-weight: 400;
-  border: none;
-  outline: none;
-  background:gainsboro;
-  color: #FFF;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.loadCard:hover{
-  background: -webkit-linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
-  background: -moz-linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
-  background: -ms-linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
-  background: -o-linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
-  background: linear-gradient(to right, #e7e7ed 0%, #8a8db6 51%, #696fba 100%);
-  color: #fff;
-  font-size: 17px;
-  font-weight: bold;
-}
-.card-body h5{
-  color:#2C2172;
-}
-.translateButton{
-  margin-top: 10px;
-  margin-left: 5px;
-  padding: 5px 10px;
-  font-size: 16px;
-  font-weight: 400;
-  border: none;
-  outline: none;
-  background: -webkit-linear-gradient(to right, #0c0643 0%, #3a28d6 51%, #847ccc 100%);
-  background: -moz-linear-gradient(to right, #0c0643 0%, #3a28d6 51%, #847ccc 100%);
-  background: -ms-linear-gradient(to right, #0c0643 0%, #3a28d6 51%, #847ccc 100%);
-  background: -o-linear-gradient(to right, #0c0643 0%, #3a28d6 51%, #847ccc 100%);
-  background: linear-gradient(to right, #0c0643 0%, #3a28d6 51%, #847ccc 100%);
-  color: #FFF;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.translateButton:hover{
-  background: gainsboro;
-  color: #000;
-  font-size: 17px;
-  font-weight: bold;
+.cardModified{
+  width:300px;
+  margin-right: 50px; 
 }
