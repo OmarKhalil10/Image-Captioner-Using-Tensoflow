@@ -152,7 +152,7 @@
   float:right;
 }
 .container label{
-  color:gainsboro;
+  color:rgb(6, 2, 25);
   font-weight: bold;
 }
 .resetCard{
@@ -222,12 +222,12 @@
   cursor: pointer;
 }
 .translateButton:hover{
-  background: -webkit-linear-gradient(to right, #998be6 0%, #6e3bef 51%, #5212f3 100%);
-  background: -moz-linear-gradient(to right, #998be6 0%, #6e3bef 51%, #5212f3 100%);
-  background: -ms-linear-gradient(to right, #998be6 0%, #6e3bef 51%, #5212f3 100%);
-  background: -o-linear-gradient(to right, #998be6 0%, #6e3bef 51%, #5212f3 100%);
-  background: linear-gradient(to right, #998be6 0%, #6e3bef 51%, #5212f3 100%);
-  color: #fff;
+  background: -webkit-linear-gradient(to right, #bababa 0%, #5a498a 51%, rgb(66, 51, 199) 100%);
+  background: -moz-linear-gradient(to right, #bababa 0%, #5a498a 51%, rgb(66, 51, 199) 100%);
+  background: -ms-linear-gradient(to right, #bababa 0%, #5a498a 51%, rgb(66, 51, 199) 100%);
+  background: -o-linear-gradient(to right, #bababa 0%, #5a498a 51%, rgb(66, 51, 199) 100%);
+  background: linear-gradient(to right, #bababa 0%, #5a498a 51%, rgb(66, 51, 199) 100%);
+  color: #000;
   font-size: 17px;
   font-weight: bold;
 }

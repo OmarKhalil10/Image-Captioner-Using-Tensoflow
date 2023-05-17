@@ -152,7 +152,7 @@
   float:right;
 }
 .container label{
-  color:gainsboro;
+  color:rgb(6, 2, 25);
   font-weight: bold;
 }
 .resetCard{
@@ -227,7 +227,7 @@
   background: -ms-linear-gradient(to right, #998be6 0%, #6e3bef 51%, #5212f3 100%);
   background: -o-linear-gradient(to right, #998be6 0%, #6e3bef 51%, #5212f3 100%);
   background: linear-gradient(to right, #998be6 0%, #6e3bef 51%, #5212f3 100%);
-  color: #fff;
+  color: #Ababab;
   font-size: 17px;
   font-weight: bold;
 }
