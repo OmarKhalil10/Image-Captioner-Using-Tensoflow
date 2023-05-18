@@ -154,11 +154,13 @@ results
 
 ### Quantitative analysis of performances among different models
 
-![search-alg-comp](/documentation/images/flickr30k/search-algorithms-comparison-with-other-models.png)
+![search-alg-comp](/documentation/images/test_analysis.png)
 
 
 ### Result and Analysis
 ## vit-gpt2-image-captioning
+
+![thanos](/documentation/images/thanos.gif)
 
 The ViT (Vision Transformer) and GPT-2 (Generative Pre-trained Transformer 2) are two different types of transformer-based models, with ViT being primarily used for computer vision tasks and GPT-2 being primarily used for natural language processing tasks. While both models share similar transformer-based architectures, their input and output formats are quite different, and therefore it is not straightforward to convert a ViT model to a GPT-2 model.
 
@@ -172,6 +174,26 @@ This can be achieved by fine-tuning a pre-trained GPT-2 model on a dataset of pa
 
 ![comparison](/documentation/images/flickr30k/comparison-30k-8k.png)
 
+## Searching Algorithm Used
+### Greedy Search algorithm
+
+Initialize the algorithm by setting the initial image as the input and an empty caption as the output.
+Define a language model that assigns a probability score to each possible word in the vocabulary given the current input image and the previous words in the caption.
+Loop until a stopping condition is reached (e.g., a maximum caption length is reached or the probability score falls below a certain threshold):
+
+* Calculate the probability score for each possible word in the vocabulary given the current input image and the previous words in the caption.
+* Select the word with the highest probability score as the next word in the caption.
+* Update the input image by encoding the current caption using an image encoder.
+* Add the selected word to the caption and repeat the loop.
+* Return the final caption as the output.
+
+![caption](/documentation/images/greedy.png)
+
+## Sequence Model
+![sequence_model](/documentation/images/sequence_model.png)
+
+## Reimplementation
+We do not intend to reimplement a proven solution for image captioning, as we aim to create our own solution that is unique and tailored to the specific needs of our users. However, we will draw inspiration from existing solutions and use their techniques as a foundation for building our own model. We will also evaluate our model against existing solutions to ensure that it performs at least as well as the state-of-the-art.
 
 ### Future Work
 
